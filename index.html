@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="script-src 'self'; object-src 'none'; base-uri 'none'">
+<title>Stride</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <div id="tabs"></div>
+  <div id="tool">
+    <button class="ib" data-a="back" data-i="back" aria-label="Atrás"></button>
+    <button class="ib" data-a="fwd" data-i="fwd" aria-label="Adelante"></button>
+    <button class="ib" data-a="reload" data-i="reload" aria-label="Recargar"></button>
+    <button class="ib" data-a="home" data-i="home" aria-label="Inicio"></button>
+    <form id="addr"><span id="sec"></span><input id="q" type="text" autocomplete="off" spellcheck="false" aria-label="Barra de direcciones"><button type="button" class="ib sm" data-a="star" data-i="star" aria-label="Marcador"></button></form>
+    <button class="pill" data-a="v" data-v="set" id="shieldBtn" aria-label="Protección"></button>
+    <button class="ib" data-a="menu" data-i="menu" aria-label="Menú"></button>
+  </div>
+  <main id="stage">
+    <div id="prog"></div>
+    <section id="home">
+      <img src="icon.png" alt="Logo de Stride">
+      <h1>Stride</h1>
+      <p class="tag" id="tag">Navega rápido. Navega seguro.</p>
+      <form class="search" id="hq"><input id="hqi" type="text" autocomplete="off" spellcheck="false" aria-label="Buscar"><b id="eng"></b></form>
+      <div class="sc" id="sc"></div>
+      <div class="feat"><span>✓ Bloqueador de anuncios</span><span>✓ HTTPS forzado</span><span>✓ Modo privado</span><span>✓ Personalizable</span></div>
+    </section>
+    <div id="err"></div>
+  </main>
+</div>
+<div id="sheet"><div id="panel"></div></div>
+<div id="toast"></div>
+<script src="renderer.js"></script>
+</body>
+  </html>
