@@ -1,0 +1,56 @@
+name: Build PC
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Icono
+        shell: bash
+        run: |
+          mkdir -p build
+          cp icon-512.png build/icon.png
+          cp icon-512.png icon.png
+      - run: npm install
+      - name: Compilar
+        shell: bash
+        run: |
+          if [ "${{ runner.os }}" = "Windows" ]; then
+            npx electron-builder --win --publish never
+          else
+            npx electron-builder --linux --publish never
+          fi
+      - uses: actions/upload-artifact@v4
+        if: runner.os == 'Windows'
+        with:
+          name: stride-windows
+          path: dist/Stride-Setup.exe
+      - uses: actions/upload-artifact@v4
+        if: runner.os == 'Linux'
+        with:
+          name: stride-linux
+          path: dist/Stride.AppImage
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: out
+          merge-multiple: true
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: Stride PC (última versión)
+          files: out/*
